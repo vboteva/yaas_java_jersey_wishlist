@@ -35,7 +35,6 @@ import com.sap.wishlist.api.generated.DocumentWishlist;
 import com.sap.wishlist.api.generated.DocumentWishlistItemRead;
 import com.sap.wishlist.api.generated.DocumentWishlistRead;
 import com.sap.wishlist.api.generated.Error;
-import com.sap.wishlist.api.generated.PagedParameters;
 import com.sap.wishlist.api.generated.ResourceLocation;
 import com.sap.wishlist.api.generated.Wishlist;
 import com.sap.wishlist.api.generated.WishlistItem;
@@ -451,14 +450,14 @@ public class WishlistService {
 
 
 	/* GET //{wishlistId}/wishlistItems */
-	public Response getByWishlistIdWishlistItems(final PagedParameters paged, YaasAwareParameters yaasAware,
+	public Response getByWishlistIdWishlistItems(final PaginationRequest paginationRequest, YaasAwareParameters yaasAware,
 		    String wishlistId) {
 
-		ArrayList<WishlistItem> result = getWishlistItemsUsingDocumentClient(paged, yaasAware, wishlistId);
+		ArrayList<WishlistItem> result = getWishlistItemsUsingDocumentClient(paginationRequest, yaasAware, wishlistId);
 		return Response.ok().entity(result).build();
 	    }
 
-	    private ArrayList<WishlistItem> getWishlistItemsUsingDocumentClient(PagedParameters paged,
+	    private ArrayList<WishlistItem> getWishlistItemsUsingDocumentClient(PaginationRequest paginationRequest,
 		    YaasAwareParameters yaasAware,
 		    String wishlistId) {
 		ArrayList<WishlistItem> result = null;
@@ -489,8 +488,8 @@ public class WishlistService {
 
 		    if (wishlistItems != null) {
 			int lastIndexOfItems = wishlistItems.size() - 1;
-			int pageNum = paged.getPageNumber();
-			int pageSize = paged.getPageSize();
+			int pageNum = paginationRequest.getPageNumber();
+			int pageSize = paginationRequest.getPageSize();
 
 			int indexOfStartItem = pageNum * pageSize - pageSize;
 			int indexOfEndItem = pageNum * pageSize - 1;

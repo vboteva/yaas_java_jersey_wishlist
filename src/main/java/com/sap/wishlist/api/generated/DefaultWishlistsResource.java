@@ -99,8 +99,8 @@ public class DefaultWishlistsResource implements WishlistsResource {
 
 	/*GET //{wishlistId}/wishlistItems*/
 	@Override
-	public Response getByWishlistIdWishlistItems(PagedParameters paged, YaasAwareParameters yaasAware, String wishlistId) {
-		return wishlistService.getByWishlistIdWishlistItems(paged, yaasAware, wishlistId);
+	public Response getByWishlistIdWishlistItems(CountableParameters countable, PagedParameters paged, YaasAwareParameters yaasAware, String wishlistId) {
+		return wishlistService.getByWishlistIdWishlistItems(new PaginationRequest(paged.getPageNumber(), paged.getPageSize(), countable.isTotalCount()), yaasAware, wishlistId);
 	}
 
 	/*POST //{wishlistId}/wishlistItems */
