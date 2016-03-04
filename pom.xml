@@ -166,6 +166,13 @@
                         <goals>
                             <goal>generate-service</goal>
                         </goals>
+                        <configuration>
+                        	<outputPackageName>com.sap.wishlist.api.generated</outputPackageName>
+                        	<outputApiTitle>api</outputApiTitle>
+                        	<inputFolders>
+            					<inputFolder>src/main/webapp/meta-data</inputFolder>
+        					</inputFolders>
+                        </configuration>
                     </execution>
                     <execution>
                         <id>Customer</id>
