@@ -1,3 +1,4 @@
+
 package com.sap.wishlist.media;
 
 import java.io.InputStream;
