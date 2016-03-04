@@ -20,7 +20,7 @@ import org.springframework.beans.factory.annotation.Value;
 import com.sap.cloud.yaas.servicesdk.authorization.AccessToken;
 import com.sap.cloud.yaas.servicesdk.jerseysupport.pagination.PaginatedCollection;
 import com.sap.cloud.yaas.servicesdk.jerseysupport.pagination.PaginationRequest;
-import com.sap.cloud.yaas.servicesdk.patternsupport.schemas.ResourceLocation;
+import com.sap.wishlist.api.generated.ResourceLocation;
 import com.sap.wishlist.api.generated.Wishlist;
 import com.sap.wishlist.api.generated.WishlistItem;
 import com.sap.wishlist.api.generated.WishlistMedia;
@@ -43,9 +43,10 @@ public class DocumentClientService {
 	public PaginatedCollection<Wishlist> getWishlists(final PaginationRequest paginationRequest,
 			final YaasAwareParameters yaasAware, final AccessToken token) {
 
-		final Response response = documentClient.tenant(yaasAware.getHybrisTenant())
-				.clientData(client)
-				.type(WISHLIST_PATH)
+		final Response response = documentClient
+				.tenant(yaasAware.getHybrisTenant())
+				.client(client)
+				.dataType(WISHLIST_PATH)
 				.prepareGet()
 				.withPageNumber(paginationRequest.getPageNumber())
 				.withPageSize(paginationRequest.getPageSize())
@@ -79,8 +80,8 @@ public class DocumentClientService {
 
 		final Response response = documentClient
 				.tenant(yaasAware.getHybrisTenant())
-				.clientData(client)
-				.type(WISHLIST_PATH)
+				.client(client)
+				.dataType(WISHLIST_PATH)
 				.dataId(wishlist.getId())
 				.preparePost()
 				.withAuthorization(token.toAuthorizationHeaderValue())
@@ -99,8 +100,8 @@ public class DocumentClientService {
 
 		final Response response = documentClient
 				.tenant(yaasAware.getHybrisTenant())
-				.clientData(client)
-				.type(WISHLIST_PATH)
+				.client(client)
+				.dataType(WISHLIST_PATH)
 				.dataId(id)
 				.prepareGet()
 				.withAuthorization(token.toAuthorizationHeaderValue())
@@ -122,8 +123,8 @@ public class DocumentClientService {
 
 		final Response response = documentClient
 				.tenant(yaasAware.getHybrisTenant())
-				.clientData(client)
-				.type(WISHLIST_PATH)
+				.client(client)
+				.dataType(WISHLIST_PATH)
 				.dataId(wishlistId)
 				.preparePut()
 				.withAuthorization(token.toAuthorizationHeaderValue())
@@ -141,8 +142,8 @@ public class DocumentClientService {
 	public void deleteWishlist(final YaasAwareParameters yaasAware, final String wishlistId, final AccessToken token) {
 		final Response response = documentClient
 				.tenant(yaasAware.getHybrisTenant())
-				.clientData(client)
-				.type(WISHLIST_PATH)
+				.client(client)
+				.dataType(WISHLIST_PATH)
 				.dataId(wishlistId)
 				.prepareDelete()
 				.withAuthorization(token.toAuthorizationHeaderValue())
@@ -169,8 +170,8 @@ public class DocumentClientService {
 
 		final Response response = documentClient
 				.tenant(yaasAware.getHybrisTenant())
-				.clientData(client)
-				.type(WISHLIST_MEDIA_PATH)
+				.client(client)
+				.dataType(WISHLIST_MEDIA_PATH)
 				.preparePost()
 				.withAuthorization(token.toAuthorizationHeaderValue())
 				.withPayload(documentWishlistMedia)
@@ -187,8 +188,8 @@ public class DocumentClientService {
 
 		final Response response = documentClient
 				.tenant(yaasAware.getHybrisTenant())
-				.clientData(client)
-				.type(WISHLIST_MEDIA_PATH)
+				.client(client)
+				.dataType(WISHLIST_MEDIA_PATH)
 				// get only the media with wishlistId
 				.withQuery("q", "wishlistId:" + wishlistId)
 				.prepareGet()
@@ -220,8 +221,8 @@ public class DocumentClientService {
 	public WishlistMedia getWishlistMedia(final YaasAwareParameters yaasAware, final String mediaId, final AccessToken token) {
 		final Response response = documentClient
 				.tenant(yaasAware.getHybrisTenant())
-				.clientData(client)
-				.type(WISHLIST_MEDIA_PATH)
+				.client(client)
+				.dataType(WISHLIST_MEDIA_PATH)
 				.dataId(mediaId)
 				.prepareGet()
 				.withAuthorization(token.toAuthorizationHeaderValue())
@@ -242,8 +243,8 @@ public class DocumentClientService {
 	public void deleteWishlistMedia(final YaasAwareParameters yaasAware, final String mediaId, final AccessToken token) {
 		final Response response = documentClient
 				.tenant(yaasAware.getHybrisTenant())
-				.clientData(client)
-				.type(WISHLIST_MEDIA_PATH)
+				.client(client)
+				.dataType(WISHLIST_MEDIA_PATH)
 				.dataId(mediaId)
 				.prepareDelete()
 				.withAuthorization(token.toAuthorizationHeaderValue())
@@ -262,8 +263,8 @@ public class DocumentClientService {
 
 		final Response response = documentClient
 				.tenant(yaasAware.getHybrisTenant())
-				.clientData(client)
-				.type(WISHLIST_PATH)
+				.client(client)
+				.dataType(WISHLIST_PATH)
 				.dataId(wishlistId)
 				.prepareGet()
 				.withAuthorization(token.toAuthorizationHeaderValue())
